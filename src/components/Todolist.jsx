@@ -162,6 +162,7 @@ const App = () => {
   const handleDelete = (key) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
+    console.log(`Tarea eliminada por: ${user?.email}`)
     const taskRef = ref(db, `tasks/${key}`);
     set(taskRef, null);
   };
@@ -181,6 +182,11 @@ const App = () => {
       title: 'Date',
       dataIndex: 'date',
       editable: false,
+    },
+    {
+      title: 'user',
+      dataIndex: 'user',
+      editable: false
     },
     {
       title: 'Check',
@@ -203,17 +209,22 @@ const App = () => {
     {
       title: 'name',
       dataIndex: 'name',
-      editable: true,
+      editable: false,
     },
     {
       title: 'Description',
       dataIndex: 'des',
-      editable: true,
+      editable: false,
     },
     {
       title: 'Date',
       dataIndex: 'date',
       editable: false,
+    },
+    {
+      title: 'user',
+      dataIndex: 'user',
+      editable: false
     },
     {
       title: 'Check',
@@ -229,6 +240,7 @@ const App = () => {
       des: 'click to edit',
       date: getFormattedDate(), 
       check: <Checkbox />,
+      user: user?.email,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
